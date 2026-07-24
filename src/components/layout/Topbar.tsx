@@ -54,23 +54,32 @@ export default function Topbar() {
         <NotificationCenter />
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src={user?.avatar || ''} alt={user?.name || 'User'} />
-                <AvatarFallback>{initials}</AvatarFallback>
-              </Avatar>
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
+          <DropdownMenuTrigger 
+            render={
+              <Button variant="ghost" className="relative h-8 w-8 rounded-full" />
+            }
+          >
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={user?.avatar || ''} alt={user?.name || 'User'} />
+              <AvatarFallback>{initials}</AvatarFallback>
+            </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/profile">Profile</Link>
+            <DropdownMenuItem 
+              render={
+                <Link href="/profile" className="w-full" />
+              }
+            >
+              Profile
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/settings">Settings</Link>
+            <DropdownMenuItem 
+              render={
+                <Link href="/settings" className="w-full" />
+              }
+            >
+              Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600 focus:bg-red-100 dark:focus:bg-red-900/20">

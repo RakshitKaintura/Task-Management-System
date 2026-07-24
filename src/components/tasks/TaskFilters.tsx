@@ -20,7 +20,7 @@ export default function TaskFilters() {
         <span className="hidden sm:inline">Filter:</span>
       </div>
 
-      <Select value={filters.status} onValueChange={(v) => setFilters({ status: v })}>
+      <Select value={filters.status} onValueChange={(v) => setFilters({ status: v || undefined })}>
         <SelectTrigger className="w-[130px] h-9 shrink-0">
           <SelectValue placeholder="Status" />
         </SelectTrigger>
@@ -32,7 +32,7 @@ export default function TaskFilters() {
         </SelectContent>
       </Select>
 
-      <Select value={filters.priority} onValueChange={(v) => setFilters({ priority: v })}>
+      <Select value={filters.priority} onValueChange={(v) => setFilters({ priority: v || undefined })}>
         <SelectTrigger className="w-[130px] h-9 shrink-0">
           <SelectValue placeholder="Priority" />
         </SelectTrigger>
@@ -45,7 +45,7 @@ export default function TaskFilters() {
         </SelectContent>
       </Select>
 
-      <Select value={filters.category} onValueChange={(v) => setFilters({ category: v })}>
+      <Select value={filters.category} onValueChange={(v) => setFilters({ category: v || undefined })}>
         <SelectTrigger className="w-[130px] h-9 shrink-0">
           <SelectValue placeholder="Category" />
         </SelectTrigger>

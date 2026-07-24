@@ -94,14 +94,16 @@ export default function NotificationCenter() {
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full relative">
-          <Bell className="h-5 w-5 text-muted-foreground" />
-          {unreadCount > 0 && (
-            <span className="absolute top-1.5 right-2 h-2.5 w-2.5 rounded-full bg-red-600 border-2 border-background animate-pulse"></span>
-          )}
-          <span className="sr-only">Notifications</span>
-        </Button>
+      <PopoverTrigger 
+        render={
+          <Button variant="ghost" size="icon" className="rounded-full relative" />
+        }
+      >
+        <Bell className="h-5 w-5 text-muted-foreground" />
+        {unreadCount > 0 && (
+          <span className="absolute top-1.5 right-2 h-2.5 w-2.5 rounded-full bg-red-600 border-2 border-background animate-pulse"></span>
+        )}
+        <span className="sr-only">Notifications</span>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80 p-0 shadow-lg">
         <div className="flex items-center justify-between px-4 py-3 border-b">

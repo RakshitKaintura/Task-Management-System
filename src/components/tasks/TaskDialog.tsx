@@ -59,6 +59,7 @@ interface TaskDialogProps {
 export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
   const { createTask, updateTask } = useTaskStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [isGeneratingAI, setIsGeneratingAI] = useState(false);
   const isEditing = !!task;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -103,10 +104,10 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      const data = {
+      const data: Partial<Task> = {
         ...values,
         estimatedTime: values.estimatedTime ? parseInt(values.estimatedTime) : undefined,
-        dueDate: values.dueDate ? values.dueDate.toISOString() : undefined,
+        dueDate: values.dueDate ? values.dueDate : undefined,
       };
 
       if (isEditing) {
@@ -123,6 +124,38 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
       setIsLoading(false);
     }
   }
+
+  const generateAIBreakdown = async () => {
+    const title = form.getValues('title');
+    const description = form.getValues('description');
+    
+    if (!title) {
+      toast.error('Please enter a task title first');
+      return;
+    }
+
+    setIsGeneratingAI(true);
+    try {
+      const res = await fetch('/api/ai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to generate breakdown');
+      }
+
+      const data = await res.json();
+      form.setValue('description', data.result);
+      toast.success('AI breakdown generated!');
+    } catch (error) {
+      toast.error('AI generation failed. Please check your API key.');
+      console.error(error);
+    } finally {
+      setIsGeneratingAI(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -155,8 +188,20 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
                   <div className="flex items-center justify-between">
                     <FormLabel>Description</FormLabel>
                     {!isEditing && (
-                      <Button type="button" variant="ghost" size="sm" className="h-6 text-xs text-primary">
-                        <Sparkles className="h-3 w-3 mr-1" /> AI Breakdown
+                      <Button 
+                        type="button" 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-6 text-xs text-primary"
+                        onClick={generateAIBreakdown}
+                        disabled={isGeneratingAI}
+                      >
+                        {isGeneratingAI ? (
+                          <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                        ) : (
+                          <Sparkles className="h-3 w-3 mr-1" />
+                        )}
+                        {isGeneratingAI ? 'Generating...' : 'AI Breakdown'}
                       </Button>
                     )}
                   </div>
@@ -164,6 +209,7 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
                     <Textarea 
                       placeholder="Add more details about this task..." 
                       className="resize-none h-24"
+                      disabled={isGeneratingAI}
                       {...field} 
                     />
                   </FormControl>
@@ -269,30 +315,29 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
                 <FormItem className="flex flex-col">
                   <FormLabel>Due Date</FormLabel>
                   <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
+                    <PopoverTrigger 
+                      render={
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-full pl-3 text-left font-normal",
+                            "w-[240px] pl-3 text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
+                        />
+                      }
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
                         selected={field.value || undefined}
                         onSelect={field.onChange}
-                        initialFocus
                       />
                     </PopoverContent>
                   </Popover>

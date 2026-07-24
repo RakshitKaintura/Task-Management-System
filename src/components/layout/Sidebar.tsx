@@ -71,21 +71,23 @@ export default function Sidebar() {
           const isActive = pathname.startsWith(item.href);
           
           return (
-            <Tooltip key={item.href} delayDuration={isSidebarCollapsed ? 0 : 1000}>
-              <TooltipTrigger asChild>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
-                    isActive 
-                      ? "bg-primary text-primary-foreground font-medium" 
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                    isSidebarCollapsed ? "justify-center px-0" : ""
-                  )}
-                >
-                  <item.icon className={cn("h-5 w-5 shrink-0", isActive ? "text-primary-foreground" : "text-muted-foreground")} />
-                  {!isSidebarCollapsed && <span className="truncate">{item.name}</span>}
-                </Link>
+            <Tooltip key={item.href}>
+              <TooltipTrigger 
+                render={
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
+                      isActive 
+                        ? "bg-primary text-primary-foreground font-medium" 
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                      isSidebarCollapsed ? "justify-center px-0" : ""
+                    )}
+                  />
+                }
+              >
+                <item.icon className={cn("h-5 w-5 shrink-0", isActive ? "text-primary-foreground" : "text-muted-foreground")} />
+                {!isSidebarCollapsed && <span className="truncate">{item.name}</span>}
               </TooltipTrigger>
               {isSidebarCollapsed && <TooltipContent side="right">{item.name}</TooltipContent>}
             </Tooltip>
@@ -99,21 +101,23 @@ export default function Sidebar() {
           const isActive = pathname.startsWith(item.href);
           
           return (
-            <Tooltip key={item.href} delayDuration={isSidebarCollapsed ? 0 : 1000}>
-              <TooltipTrigger asChild>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
-                    isActive 
-                      ? "bg-primary text-primary-foreground font-medium" 
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                    isSidebarCollapsed ? "justify-center px-0" : ""
-                  )}
-                >
-                  <item.icon className={cn("h-5 w-5 shrink-0", isActive ? "text-primary-foreground" : "text-muted-foreground")} />
-                  {!isSidebarCollapsed && <span className="truncate">{item.name}</span>}
-                </Link>
+            <Tooltip key={item.href}>
+              <TooltipTrigger 
+                render={
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
+                      isActive 
+                        ? "bg-primary text-primary-foreground font-medium" 
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                      isSidebarCollapsed ? "justify-center px-0" : ""
+                    )}
+                  />
+                }
+              >
+                <item.icon className={cn("h-5 w-5 shrink-0", isActive ? "text-primary-foreground" : "text-muted-foreground")} />
+                {!isSidebarCollapsed && <span className="truncate">{item.name}</span>}
               </TooltipTrigger>
               {isSidebarCollapsed && <TooltipContent side="right">{item.name}</TooltipContent>}
             </Tooltip>

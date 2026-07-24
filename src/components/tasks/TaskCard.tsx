@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { format } from 'date-fns';
-import { CalendarIcon, Clock, MoreVertical, Edit2, Trash2, CheckCircle2 } from 'lucide-react';
+import { CalendarIcon, Clock, MoreVertical, Edit2, Trash2, CheckCircle2, MoreHorizontal } from 'lucide-react';
 import { Task } from '@/types';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -92,12 +92,15 @@ export default function TaskCard({ task }: TaskCardProps) {
             </div>
             
             <DropdownMenu>
-              <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
-                <Button variant="ghost" className="h-6 w-6 p-0 -mr-2 -mt-1 text-muted-foreground hover:text-foreground">
-                  <span className="sr-only">Open menu</span>
-                  <MoreVertical className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
+              <DropdownMenuTrigger 
+                onClick={(e) => e.stopPropagation()}
+                render={
+                  <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                }
+              />
               <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
                 <DropdownMenuItem onClick={() => setIsEditOpen(true)}>
                   <Edit2 className="mr-2 h-4 w-4" /> Edit

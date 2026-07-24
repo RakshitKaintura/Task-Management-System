@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
+import { CheckCircle2 } from 'lucide-react';
 import useAuthStore from '@/store/useAuthStore';
 import useTaskStore from '@/store/useTaskStore';
 import StatsCards from '@/components/dashboard/StatsCards';

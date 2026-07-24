@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Bell, Moon, Monitor, Sun, Lock, Loader2, Smartphone } from 'lucide-react';
+import { Bell, Moon, Monitor, Sun, Lock, Loader2, Smartphone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';

@@ -105,14 +105,12 @@ export default function CalendarView() {
             <div className="mt-2 flex flex-col gap-1">
               {dayTasks.slice(0, 3).map((task, idx) => (
                 <Popover key={task._id || idx}>
-                  <PopoverTrigger asChild>
-                    <div className={`text-xs p-1 rounded truncate cursor-pointer ${
+                  <PopoverTrigger className={`text-left text-xs p-1 rounded truncate cursor-pointer w-full ${
                       task.status === 'completed' ? 'bg-green-100 text-green-800 dark:bg-green-900/30' :
                       task.priority === 'high' || task.priority === 'critical' ? 'bg-rose-100 text-rose-800 dark:bg-rose-900/30' :
                       'bg-blue-100 text-blue-800 dark:bg-blue-900/30'
                     }`}>
                       {task.title}
-                    </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-64">
                     <div className="space-y-2">
