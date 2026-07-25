@@ -8,8 +8,18 @@ export default function AuthLayout({
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
       {/* Left panel - Branding (hidden on small screens) */}
-      <div className="hidden md:flex flex-col justify-between bg-zinc-900 p-10 text-white dark:bg-zinc-950">
-        <div className="flex items-center gap-2 font-bold text-2xl">
+      <div 
+        className="hidden md:flex flex-col justify-between p-10 text-white relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/Importance-of-Time-Management-in-the-Workplace-to-be-More-Effective-and-Productive.webp')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      >
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-zinc-900/75 dark:bg-zinc-950/85" />
+        
+        <div className="relative z-10 flex items-center gap-2 font-bold text-2xl">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +38,7 @@ export default function AuthLayout({
           TaskFlow AI
         </div>
         
-        <div className="space-y-6">
+        <div className="relative z-10 space-y-6">
           <blockquote className="space-y-2">
             <p className="text-lg">
               "This platform has completely transformed how I manage my daily tasks. 
