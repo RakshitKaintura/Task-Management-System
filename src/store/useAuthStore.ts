@@ -24,6 +24,7 @@ const useAuthStore = create<AuthState>((set) => ({
       console.error('Logout failed', e);
     }
     set({ user: null, isAuthenticated: false });
+    window.location.href = '/login';
   },
   
   fetchUser: async () => {
