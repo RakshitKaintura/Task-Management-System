@@ -27,7 +27,13 @@ export default function QuickAddTask() {
 
     setIsLoading(true);
     try {
-      await createTask({ title, status: 'todo', priority: 'medium', category: 'personal' });
+      await createTask({ 
+        title, 
+        status: 'todo', 
+        priority: 'medium', 
+        category: 'personal',
+        dueDate: new Date()
+      });
       toast.success('Task created successfully');
       setOpen(false);
       setTitle('');

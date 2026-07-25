@@ -70,7 +70,7 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
       status: 'todo',
       priority: 'medium',
       category: 'personal',
-      dueDate: null,
+      dueDate: new Date(),
       estimatedTime: '',
     },
   });
@@ -94,7 +94,7 @@ export default function TaskDialog({ open, onOpenChange, task }: TaskDialogProps
           status: 'todo',
           priority: 'medium',
           category: 'personal',
-          dueDate: null,
+          dueDate: new Date(),
           estimatedTime: '',
         });
       }
