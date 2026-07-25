@@ -105,7 +105,7 @@ export default function LandingPage() {
                   Start for free <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link 
-                href="https://github.com" 
+                href="https://github.com/RakshitKaintura/Task-Management-System" 
                 target="_blank"
                 className={buttonVariants({ variant: 'outline', size: 'lg', className: 'rounded-full h-12 px-8 text-base' })}
               >
