@@ -16,10 +16,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ThemeToggle from './ThemeToggle';
 import NotificationCenter from './NotificationCenter';
+import { useRouter } from 'next/navigation';
 import useAuthStore from '@/store/useAuthStore';
 import useUIStore from '@/store/useUIStore';
 
 export default function Topbar() {
+  const router = useRouter();
   const { user, logout } = useAuthStore();
   const { setMobileMenuOpen } = useUIStore();
 
@@ -75,16 +77,14 @@ export default function Topbar() {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem 
-              render={
-                <Link href="/profile" className="w-full" />
-              }
+              onClick={() => router.push('/profile')}
+              className="w-full cursor-pointer"
             >
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem 
-              render={
-                <Link href="/settings" className="w-full" />
-              }
+              onClick={() => router.push('/settings')}
+              className="w-full cursor-pointer"
             >
               Settings
             </DropdownMenuItem>
