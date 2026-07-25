@@ -2,16 +2,21 @@ import { create } from 'zustand';
 
 interface UIState {
   isSidebarCollapsed: boolean;
+  isMobileMenuOpen: boolean;
   theme: 'light' | 'dark' | 'system';
   toggleSidebar: () => void;
+  setMobileMenuOpen: (open: boolean) => void;
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
 }
 
 const useUIStore = create<UIState>((set) => ({
   isSidebarCollapsed: false,
+  isMobileMenuOpen: false,
   theme: 'system',
   
   toggleSidebar: () => set((state) => ({ isSidebarCollapsed: !state.isSidebarCollapsed })),
+  
+  setMobileMenuOpen: (open) => set({ isMobileMenuOpen: open }),
   
   setTheme: (theme) => {
     set({ theme });

@@ -17,9 +17,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ThemeToggle from './ThemeToggle';
 import NotificationCenter from './NotificationCenter';
 import useAuthStore from '@/store/useAuthStore';
+import useUIStore from '@/store/useUIStore';
 
 export default function Topbar() {
   const { user, logout } = useAuthStore();
+  const { setMobileMenuOpen } = useUIStore();
 
   // Get initials for avatar fallback
   const initials = user?.name
@@ -32,7 +34,12 @@ export default function Topbar() {
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <Button variant="outline" size="icon" className="md:hidden shrink-0">
+      <Button 
+        variant="outline" 
+        size="icon" 
+        className="md:hidden shrink-0"
+        onClick={() => setMobileMenuOpen(true)}
+      >
         <Menu className="h-5 w-5" />
         <span className="sr-only">Toggle Menu</span>
       </Button>

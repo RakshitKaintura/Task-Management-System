@@ -33,20 +33,39 @@ const bottomNavItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { isSidebarCollapsed, toggleSidebar } = useUIStore();
+  const { isSidebarCollapsed, toggleSidebar, isMobileMenuOpen, setMobileMenuOpen } = useUIStore();
 
   const sidebarVariants = {
     expanded: { width: '240px' },
     collapsed: { width: '70px' },
+    mobile: { width: '240px', x: 0 },
+    mobileHidden: { width: '240px', x: '-100%' }
   };
 
   return (
-    <motion.aside
-      initial={false}
-      animate={isSidebarCollapsed ? 'collapsed' : 'expanded'}
-      variants={sidebarVariants}
-      className="hidden md:flex flex-col border-r bg-card h-screen sticky top-0 z-40 transition-colors"
-    >
+    <>
+      {/* Mobile Backdrop */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden" 
+          onClick={() => setMobileMenuOpen(false)} 
+        />
+      )}
+      
+      <motion.aside
+        initial={false}
+        animate={
+          typeof window !== 'undefined' && window.innerWidth < 768
+            ? (isMobileMenuOpen ? 'mobile' : 'mobileHidden')
+            : (isSidebarCollapsed ? 'collapsed' : 'expanded')
+        }
+        variants={sidebarVariants}
+        className={cn(
+          "flex-col border-r bg-card h-screen transition-colors",
+          "fixed inset-y-0 left-0 z-50 flex md:sticky md:top-0 md:z-40",
+          !isMobileMenuOpen && "hidden md:flex" // Hide completely on mobile when closed so it doesn't block clicks
+        )}
+      >
       {/* Logo & Toggle */}
       <div className={cn("flex items-center h-16 border-b px-4", isSidebarCollapsed ? "justify-center" : "justify-between")}>
         {!isSidebarCollapsed && (
@@ -76,6 +95,11 @@ export default function Sidebar() {
                 render={
                   <Link
                     href={item.href}
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+                        setMobileMenuOpen(false);
+                      }
+                    }}
                     className={cn(
                       "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
                       isActive 
@@ -106,6 +130,11 @@ export default function Sidebar() {
                 render={
                   <Link
                     href={item.href}
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+                        setMobileMenuOpen(false);
+                      }
+                    }}
                     className={cn(
                       "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
                       isActive 
@@ -125,5 +154,6 @@ export default function Sidebar() {
         })}
       </div>
     </motion.aside>
+    </>
   );
 }
