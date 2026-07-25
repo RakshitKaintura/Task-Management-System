@@ -16,10 +16,9 @@ export default function AuthLayout({
           backgroundPosition: "center"
         }}
       >
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-zinc-900/75 dark:bg-zinc-950/85" />
+        {/* Removed dark overlay as requested */}
         
-        <div className="relative z-10 flex items-center gap-2 font-bold text-2xl">
+        <div className="relative z-10 flex items-center gap-2 font-bold text-2xl drop-shadow-md">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +37,7 @@ export default function AuthLayout({
           TaskFlow AI
         </div>
         
-        <div className="relative z-10 space-y-6">
+        <div className="relative z-10 space-y-6 drop-shadow-md bg-black/20 p-4 rounded-xl backdrop-blur-sm">
           <blockquote className="space-y-2">
             <p className="text-lg">
               "This platform has completely transformed how I manage my daily tasks. 
