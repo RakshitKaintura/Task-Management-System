@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskFlow - Smart Task Management System
 
-## Getting Started
+![TaskFlow Dashboard](https://task-management-system-inky-nine.vercel.app/dashboard) <!-- You can replace this with an actual screenshot link -->
 
-First, run the development server:
+**Live Demo:** [https://task-management-system-inky-nine.vercel.app](https://task-management-system-inky-nine.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+TaskFlow is a modern, AI-powered task management application designed to help you organize your daily life and workflows. Built with a stunning, highly responsive user interface, it features everything from traditional Kanban boards and calendar views to AI-driven task breakdowns.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **🧠 Smart AI Integration:** Automatically generate step-by-step breakdowns for complex tasks using Google Gemini AI.
+- **📊 Analytics Dashboard:** Get a bird's-eye view of your productivity with real-time statistics and recent activity tracking.
+- **📋 Interactive Kanban Board:** Organize tasks visually by their status (To Do, In Progress, Completed).
+- **📅 Calendar View:** Track due dates effortlessly with an integrated monthly calendar.
+- **🔐 Secure Authentication:** Full user registration, login, and secure session management using JWT and bcrypt.
+- **🎨 Modern UI/UX:** Built with beautifully styled components, smooth animations (Framer Motion), and full Dark/Light mode support.
+- **🔍 Advanced Filtering:** Search and filter your tasks by priority, category, and status.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** Base UI / Custom Shadcn-inspired components
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Database:** [MongoDB](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/)
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/)
+- **AI Integration:** Google Gemini AI API
+- **Icons:** [Lucide React](https://lucide.dev/)
 
-To learn more about Next.js, take a look at the following resources:
+## 💻 Getting Started (Local Development)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Follow these steps to set up the project locally on your machine.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- MongoDB account and database cluster
+- Google Gemini API Key
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/smart_task_management_system.git
+   cd smart_task_management_system
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Variables:**
+   Create a `.env.local` file in the root directory and add the following variables:
+   ```env
+   # MongoDB Connection String
+   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/?retryWrites=true&w=majority
+   
+   # JWT Secret for Authentication
+   SESSION_SECRET=your_super_secret_jwt_key
+   
+   # Google Gemini API Key for AI Features
+   GEMINI_API_KEY=your_gemini_api_key
+   ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🚢 Deployment
+
+This project is optimized for deployment on [Vercel](https://vercel.com).
+1. Push your code to GitHub.
+2. Import the repository into Vercel.
+3. Add your Environment Variables in the Vercel project settings.
+4. Deploy!
+
+## 📄 License
+
+This project is open-source and available under the MIT License.

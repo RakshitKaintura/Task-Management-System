@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { 
   LayoutDashboard, 
@@ -33,6 +33,7 @@ const bottomNavItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { isSidebarCollapsed, toggleSidebar, isMobileMenuOpen, setMobileMenuOpen } = useUIStore();
 
   const sidebarVariants = {
@@ -93,15 +94,17 @@ export default function Sidebar() {
             <Tooltip key={item.href}>
               <TooltipTrigger 
                 render={
-                  <Link
+                  <a
                     href={item.href}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
+                      router.push(item.href);
                       if (typeof window !== 'undefined' && window.innerWidth < 768) {
                         setMobileMenuOpen(false);
                       }
                     }}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
+                      "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden cursor-pointer",
                       isActive 
                         ? "bg-primary text-primary-foreground font-medium" 
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -128,15 +131,17 @@ export default function Sidebar() {
             <Tooltip key={item.href}>
               <TooltipTrigger 
                 render={
-                  <Link
+                  <a
                     href={item.href}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
+                      router.push(item.href);
                       if (typeof window !== 'undefined' && window.innerWidth < 768) {
                         setMobileMenuOpen(false);
                       }
                     }}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden",
+                      "flex items-center gap-3 rounded-md px-3 py-2 transition-colors overflow-hidden cursor-pointer",
                       isActive 
                         ? "bg-primary text-primary-foreground font-medium" 
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
